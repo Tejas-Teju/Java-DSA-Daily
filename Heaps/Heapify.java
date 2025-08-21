@@ -22,19 +22,27 @@ public class Heapify {
 		while (true) {
 			int left = (2 * index) + 1;
 			int right = (2 * index) + 2;
-			int largestSmallest = index;
+			int updatedIndex = index;
 
-			if (isMaxHeap) {
-				if (left < len && nums[left] > nums[largestSmallest]) largestSmallest = left;
-				if (right < len && nums[right] > nums[largestSmallest]) largestSmallest = right;
-			} else {
-				if (left < len && nums[left] < nums[largestSmallest]) largestSmallest = left;
-				if (right < len && nums[right] < nums[largestSmallest]) largestSmallest = right;
+			if (left < len) {
+				if (isMaxHeap) {
+					updatedIndex = nums[left] > nums[updatedIndex] ? left : updatedIndex;
+				} else {
+					updatedIndex = nums[left] < nums[updatedIndex] ? left : updatedIndex;
+				}
 			}
 
-			if (largestSmallest != index) {
-				swap(nums, largestSmallest, index);
-				index = largestSmallest;
+			if (right < len) {
+				if (isMaxHeap) {
+					updatedIndex = nums[right] > nums[updatedIndex] ? right : updatedIndex;
+				} else {
+					updatedIndex = nums[right] < nums[updatedIndex] ? right : updatedIndex;
+				}
+			}
+
+			if (updatedIndex != index) {
+				swap(nums, updatedIndex, index);
+				index = updatedIndex;
 			} else {
 				break;
 			}
